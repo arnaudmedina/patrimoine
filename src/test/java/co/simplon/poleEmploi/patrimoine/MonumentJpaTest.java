@@ -16,7 +16,7 @@ public class MonumentJpaTest {
 	@Test
 	public void le_monument_6_doit_etre_TerraNova() {
 		// GIVEN
-		int idRecherche = 6;
+		int idRecherche = 6; 
 
 		// WHEN
 		EntityManagerFactory emf = Persistence

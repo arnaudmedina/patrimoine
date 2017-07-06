@@ -18,9 +18,6 @@ public class Monument implements Serializable {
 	@Column(name = "ID", unique = true, nullable = false)
  	private Long identifiant;
 
-//	@Column(name = "CITIES_ID", nullable = false, insertable = false, updatable = false)
-//	private long citiesId;
-
 	@Column(name = "NAME", nullable = false, length = 100)
  	private String nom;
 
@@ -43,14 +40,6 @@ public class Monument implements Serializable {
 		this.identifiant = id;
 	}
 
-//	public long getCitiesId() {
-//		return this.citiesId;
-//	}
-//
-//	public void setCitiesId(long l) {
-//		this.citiesId = l;
-//	}
-
 	public String getName() {
 		return this.nom;
 	}
@@ -69,6 +58,52 @@ public class Monument implements Serializable {
 
 	public String toString() {
 		return this.nom + " - " + ville.toString();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((identifiant == null) ? 0 : identifiant.hashCode());
+		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
+		result = prime * result + ((ville == null) ? 0 : ville.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Monument other = (Monument) obj;
+		if (identifiant == null) {
+			if (other.identifiant != null) {
+				return false;
+			}
+		} else if (!identifiant.equals(other.identifiant)) {
+			return false;
+		}
+		if (nom == null) {
+			if (other.nom != null) {
+				return false;
+			}
+		} else if (!nom.equals(other.nom)) {
+			return false;
+		}
+		if (ville == null) {
+			if (other.ville != null) {
+				return false;
+			}
+		} else if (!ville.equals(other.ville)) {
+			return false;
+		}
+		return true;
 	}
 
 }

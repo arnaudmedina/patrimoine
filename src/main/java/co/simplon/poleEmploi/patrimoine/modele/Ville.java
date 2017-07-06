@@ -23,19 +23,23 @@ public class Ville {
 	@Column(name="LONGITUDE")
 	private double longitude;
 	
-	@OneToMany
-	@JoinColumn(name="CITIES_ID")
+	@OneToMany (mappedBy = "ville", cascade={CascadeType.ALL})
+//	@JoinColumn(name="CITIES_ID")
 	private Set<Monument> monuments;
 	
 	public Ville() {
 	}
-	
-	public Ville ( long id, String nom, double latitude, double longitude) {
-		setId(id);
+
+	public Ville ( String nom, double latitude, double longitude) {
 		setNom(nom);
 		setLatitude(latitude);
 		setLongitude(longitude);
 		monuments = new HashSet<Monument>();
+	}
+	
+	public Ville ( long id, String nom, double latitude, double longitude) {
+		this(nom, latitude, longitude);
+		setId(id);
 	}
 	
 	public long getId() {
@@ -120,6 +124,4 @@ public class Ville {
 			return false;
 		return true;
 	}
-
-	
 }

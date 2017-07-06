@@ -17,7 +17,7 @@ public class MonumentJpaDao implements MonumentDao{
 	}
 	
 	@Override
-	public Monument getMonumentById(long idRecherche) {
+	public Monument getMonumentById(long idRecherche) throws EntityNotFoundException{
 		Monument monument = entityManager.find(Monument.class, idRecherche);
 		if (monument != null)
 			return monument;

@@ -3,6 +3,9 @@
   <groupId>co.simplon.pole-emploi</groupId>
   <artifactId>patrimoine</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
   <name>Gestionnaire du patrimoine de la France</name>
   	<build>
 		<plugins>

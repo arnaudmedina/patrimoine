@@ -1,41 +1,39 @@
 package co.simplon.poleEmploi.patrimoine.dao;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.EntityNotFoundException;
+import co.simplon.poleEmploi.patrimoine.modele.Ville;
 
-import co.simplon.poleEmploi.patrimoine.modele.Monument;
-
-public class MonumentJpaDao implements MonumentDao{
+public class VilleJpaDao implements VilleDao{
 	EntityManager entityManager;
 	
-	public MonumentJpaDao (){
+	public VilleJpaDao (){
 		EntityManagerFactory emf = Persistence
 				.createEntityManagerFactory("BasePatrimoine");
 		entityManager = emf.createEntityManager();
 	}
 	
 	@Override
-	public Monument getMonumentById(long idRecherche) {
-		Monument monument = entityManager.find(Monument.class, idRecherche);
-		if (monument != null)
-			return monument;
+	public Ville getVilleById(long idRecherche) {
+		Ville ville = entityManager.find(Ville.class, idRecherche);
+		if (ville != null)
+			return ville;
 		else
 			throw new EntityNotFoundException();
 	}
 
 	@Override
-	public void deleteMonumentById(long idRecherche) {
-		Monument monument = entityManager.find(Monument.class, idRecherche);
-		entityManager.remove(monument);
+	public void deleteVilleById(long idRecherche) {
+		Ville ville = entityManager.find(Ville.class, idRecherche);
+		entityManager.remove(ville);
 	}
 
 	@Override
-	public Monument createMonument(Monument monument) {
+	public Ville createVille(Ville ville) {
 		entityManager.getTransaction().begin();
-		entityManager.persist(monument);
+		entityManager.persist(ville);
 		entityManager.getTransaction().commit();
-		return monument;
+		return ville;
 	}
 }

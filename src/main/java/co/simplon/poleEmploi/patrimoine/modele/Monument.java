@@ -14,53 +14,61 @@ public class Monument implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private int id;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "ID", unique = true, nullable = false)
+ 	private Long identifiant;
 
-	@Column(name = "CITIES_ID")
-	private int citiesId;
+//	@Column(name = "CITIES_ID", nullable = false, insertable = false, updatable = false)
+//	private long citiesId;
 
-	private String name;
+	@Column(name = "NAME", nullable = false, length = 100)
+ 	private String nom;
 
 	@ManyToOne
-	private Ville cities;
+	@JoinColumn(name="CITIES_ID")
+	private Ville ville;
 
 	public Monument() {
 	}
-
-	public int getId() {
-		return this.id;
+	
+	public Monument(String name) {
+		setName(name);
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public long getId() {
+		return this.identifiant;
 	}
 
-	public int getCitiesId() {
-		return this.citiesId;
+	public void setId(long id) {
+		this.identifiant = id;
 	}
 
-	public void setCitiesId(int citiesId) {
-		this.citiesId = citiesId;
-	}
+//	public long getCitiesId() {
+//		return this.citiesId;
+//	}
+//
+//	public void setCitiesId(long l) {
+//		this.citiesId = l;
+//	}
 
 	public String getName() {
-		return this.name;
+		return this.nom;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.nom = name;
 	}
 
 	public Ville getVille() {
-		return cities;
+		return ville;
 	}
 
 	public void setVille(Ville ville) {
-		this.cities = ville;
+		this.ville = ville;
 	}
 
 	public String toString() {
-		return this.name + " - " + cities.toString();
+		return this.nom + " - " + ville.toString();
 	}
 
 }

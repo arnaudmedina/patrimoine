@@ -14,9 +14,30 @@ import co.simplon.poleEmploi.patrimoine.modele.Monument;
 public class MonumentJpaTest {
 
 	@Test
+	public void l_ensemble_des_monuments_de_Paris_est_accessible(){
+		// GIVEN
+		long idRecherche = 7L;
+		
+		// WHEN
+		
+		EntityManagerFactory emf = Persistence
+				.createEntityManagerFactory("BasePatrimoine");
+		EntityManager em = emf.createEntityManager();
+		Monument monument =  em.find(Monument.class, idRecherche);
+
+		// THEN
+		assertEquals(idRecherche, monument.getId());
+		System.out.println("Monument trouvé : " + monument);
+		System.out.println("Ville trouvée : " + monument.getVille());
+		assertEquals("Notre-Dame", monument.getName());
+//		assertEquals(idRecherche, monument.getCitiesId());
+		assertEquals("Sainte-Foi", monument.getVille().getNom());
+	}
+	
+	@Test
 	public void le_monument_6_doit_etre_TerraNova() {
 		// GIVEN
-		int idRecherche = 6;
+		long idRecherche = 6L;
 
 		// WHEN
 		EntityManagerFactory emf = Persistence
@@ -27,7 +48,7 @@ public class MonumentJpaTest {
 		// THEN
 		assertEquals(idRecherche, monument.getId());
 		assertEquals("Terra Nova", monument.getName());
-		assertEquals(33644, monument.getCitiesId());
+//		assertEquals(33644L, monument.getCitiesId());
 		assertEquals("Montreuil", monument.getVille().getNom());
 //		System.out.println(monument);
 	}

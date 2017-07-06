@@ -26,7 +26,7 @@ public class VilleJpaTest {
 		// THEN
 		assertEquals(idRecherche, ville.getId());
 		assertEquals("Forstfeld", ville.getNom());
-		assertEquals(8.03333, ville.getLongitude(),0.1);
 		assertEquals(48.85, ville.getLatitude(),0.1);
+		assertEquals(8.03333, ville.getLongitude(),0.1);
 	}
 }

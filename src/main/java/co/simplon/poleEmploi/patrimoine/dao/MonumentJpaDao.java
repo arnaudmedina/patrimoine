@@ -7,7 +7,7 @@ import javax.persistence.EntityNotFoundException;
 
 import co.simplon.poleEmploi.patrimoine.modele.Monument;
 
-public class MonumentJpaDao implements MonumentDao{
+public class MonumentJpaDao implements MonumentDao, AutoCloseable{
 	EntityManager entityManager;
 	
 	public MonumentJpaDao (){
@@ -37,5 +37,10 @@ public class MonumentJpaDao implements MonumentDao{
 		entityManager.persist(monument);
 		entityManager.getTransaction().commit();
 		return monument;
+	}
+
+	@Override
+	public void close() throws Exception {
+		entityManager.close();
 	}
 }

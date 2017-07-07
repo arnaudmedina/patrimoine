@@ -5,43 +5,47 @@ import java.util.Set;
 
 import javax.persistence.*;
 
-//@Embeddable
+@NamedQueries({ @NamedQuery(name = "Ville.FindAll", query = "SELECT v FROM Ville v "),
+		@NamedQuery(name = "Ville.FindByName", query = "SELECT v FROM Ville v WHERE v.nom = :nom"),
+		@NamedQuery(name = "Ville.FindByMonumentName", query = "SELECT v FROM Ville v, Monument m WHERE m.ville = v AND m.nom = :nom"),
+		@NamedQuery(name = "Ville.FindDoublon", query = "SELECT v FROM Ville v WHERE v.nom = :nom AND v.latitude = :lat AND v.longitude = :long") })
+
 @Entity
-@Table (name="CITIES")
+@Table(name = "CITIES")
 public class Ville {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="ID")
+	@Column(name = "ID")
 	private long id;
-	
-	@Column(name="NAME")
+
+	@Column(name = "NAME")
 	private String nom;
 
-	@Column(name="LATITUDE")
+	@Column(name = "LATITUDE")
 	private double latitude;
-	
-	@Column(name="LONGITUDE")
+
+	@Column(name = "LONGITUDE")
 	private double longitude;
-	
-	@OneToMany (mappedBy = "ville", cascade={CascadeType.ALL})
-//	@JoinColumn(name="CITIES_ID")
+
+	@OneToMany(mappedBy = "ville", cascade = { CascadeType.ALL })
+	// @JoinColumn(name="CITIES_ID")
 	private Set<Monument> monuments;
-	
+
 	public Ville() {
 	}
 
-	public Ville ( String nom, double latitude, double longitude) {
+	public Ville(String nom, double latitude, double longitude) {
 		setNom(nom);
 		setLatitude(latitude);
 		setLongitude(longitude);
 		monuments = new HashSet<Monument>();
 	}
-	
-	public Ville ( long id, String nom, double latitude, double longitude) {
+
+	public Ville(long id, String nom, double latitude, double longitude) {
 		this(nom, latitude, longitude);
 		setId(id);
 	}
-	
+
 	public long getId() {
 		return id;
 	}
@@ -73,15 +77,15 @@ public class Ville {
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-	
-	public String toString(){
-		return ( getNom() + " : " + getLatitude() + " , " + getLongitude()	);
-		}
 
-	public Set<Monument>  getMonuments() {
+	public String toString() {
+		return (getNom() + " : " + getLatitude() + " , " + getLongitude());
+	}
+
+	public Set<Monument> getMonuments() {
 		return this.monuments;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
